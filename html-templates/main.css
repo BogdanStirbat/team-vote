@@ -376,6 +376,7 @@ nav {
 
 .navigation {
   display: flex;
+  align-items: flex-start;
 }
 
 .navigation-item {
@@ -385,7 +386,7 @@ nav {
 .navigation-item a {
   text-decoration: none;
   color: #322F8B;
-  font-family: Roboto, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 18px;
 }
@@ -420,8 +421,103 @@ nav {
   border-bottom-style: none;
 }
 
+.avatar {
+  margin-top: -20px;
+  margin-left: 189px;
+}
+
+.notifications-icon {
+  margin-left: 20px;
+  margin-top: -4px;
+}
+
+.notification-count {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  position: absolute;
+  margin-left: 15px;
+  margin-top: -40px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border: 2px solid #C13137;
+  border-radius: 50%;
+  background-color: #C13137;
+  color: #FFFFFF;
+}
+
+.count {
+  padding-top: 3px;
+}
+
+.notifications-relative-positioning {
+  position: relative;
+}
+
+.notifications-area {
+  position: absolute;
+  width: 190px;
+  right: -82px;
+  border-radius: 25px;
+  background-color: rgba(50, 47, 139, 0.1);
+  margin-top: -6px;
+}
+
+.notification p {
+  width: 170px;
+  margin-left: 5px;
+  background-color: #FFFFFF;
+  color: #322F8B;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+}
+
+.notification.read p {
+  font-weight: 300;
+}
+
+.notification:not(:first-child) {
+  margin-top: 32px;
+}
+
+.notification:last-child {
+  margin-bottom: 10px;
+}
+
+.notification .delete-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 4px 20px;
+  border-radius: 25px;
+  margin-left: 14px;
+  background-color: #C13137;
+  color: #FFFFFF;
+  display: inline-block;
+}
+
+.notification .mark-read-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-width: 2px;
+  border-radius: 25px;
+  background-color: #ffffff;
+  color: #000000;
+  border-style: solid;
+  border-color: #C13137;
+  display: inline-block;
+}
+
+
 /*
-    Home page - section one
+    Home page (guest) - section one
 */
 
 .description h1 {
@@ -522,7 +618,7 @@ nav {
 
 
 /*
-    Home page - section two
+    Home page (guest) - section two
 */
 .functionality-brief {
   background-color: rgba(50, 47, 139, 0.1);
@@ -568,6 +664,131 @@ nav {
   margin-top: -10px;
 }
 
+
+/*
+    Home page (logged in)
+*/
+
+.home-logged-in {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin-top: 80px;
+}
+
+.btn-create-new-team {
+  text-align: center;
+  background-color: #C13137;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin-left: 49px;
+}
+
+.btn-create-new-team:hover {
+  background-color: #8F151A;
+}
+
+.btn-create-new-team a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.create-join-team > p {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #322F8B;
+  text-align: center;
+}
+
+.create-join-team > p:first-of-type {
+  margin-top: 10px;
+  margin-bottom: -25px;
+}
+
+.search-team input[type=text] {
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid #322F8B;
+  float: left;
+  width: 70%;
+  border-radius: 15px;
+  background: #FFFFFF;
+  color: #C13137;
+}
+
+.search-team input[type=text]:focus {
+  border: 1px solid #C13137;
+}
+
+.search-team button {
+  float: left;
+  width: 16%;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 15px;
+  background: #C13137;
+  color: white;
+  font-size: 20px;
+  border: 1px solid #322F8B;
+  border-left: none;
+  cursor: pointer;
+}
+
+.search-team button:hover {
+  background: #8F151A;
+}
+
+.search-team::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.your-teams h1 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  color: #322F8B;
+}
+
+.teams-area {
+  width: 250px;
+  height: 450px;
+  border-radius: 25px;
+  background-color: rgba(50, 47, 139, 0.1);
+  margin-left: 3px;
+  margin-top: -30px;
+}
+
+.team-name {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.team-name a {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: none;
+  color: #322F8B;
+  background-color: #FFFFFF;
+  padding: 4px 8px;
+  border-radius: 15px;
+  transition: background-color 0.1s ease-out, 
+              color 0.1s ease-out;
+}
+
+.team-name a:hover {
+  color: #FFFFFF;
+  background-color: #C13137;
+  transition: background-color 0.1s ease-out, 
+              color 0.1s ease-out;
+}
 
 /*
     Footer
