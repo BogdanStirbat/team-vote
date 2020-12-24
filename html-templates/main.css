@@ -455,6 +455,10 @@ nav {
   position: relative;
 }
 
+.notifications-relative-positioning.hidden {
+  display: none;
+}
+
 .notifications-area {
   position: absolute;
   width: 190px;
@@ -789,6 +793,44 @@ nav {
   transition: background-color 0.1s ease-out, 
               color 0.1s ease-out;
 }
+
+
+/*
+    Join team screen
+*/
+
+.join-team h1 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  color: #322F8B;
+  margin-top: 110px;
+  text-align: center;
+}
+
+
+.join-team .btn {
+  background-color: #C13137;
+  padding: 20px 40px;
+  border-radius: 25px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 150px;
+  display: block;
+  transition: background-color 0.1s ease-out;
+  margin-bottom: 30%;
+}
+
+.join-team .btn:hover {
+  background-color: #8F151A;
+  transition: background-color 0.1s ease-out;
+}
+
+.join-team .btn a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
 
 /*
     Footer
