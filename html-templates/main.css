@@ -831,6 +831,129 @@ nav {
   text-decoration: none;
 }
 
+/*
+    Team screen (not admin)
+*/
+.team-not-admin {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+  margin-left: 60px;
+  max-width: 1000px;
+}
+
+.online-members-area h1 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #322F8B;
+}
+
+.team-members {
+  width: 340px;
+  max-width: 340px;
+  height: 400px;
+  max-height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  margin-top: 30px;
+  background-color: rgba(50, 47, 139, 0.1);
+}
+
+.team-member {
+  margin-top: -30px;
+  margin-left: 30px;
+}
+
+.team-member p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #322F8B;
+  display: inline-block;
+}
+
+.team-member .circle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.team-member .voted {
+  background-color: #6AB7BF;
+}
+
+.team-member .not-voted {
+  background-color: #FF9436;
+}
+
+.team-member .refrain {
+  background-color: #FFFFFF;
+}
+
+.question-area {
+  margin-top: 60px;
+}
+
+.question {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #322F8B;
+}
+
+.variation {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #322F8B;
+  line-height: 24px;
+  margin-top: -10px;
+  margin-left: 20px;
+}
+
+.actions p {
+  display: inline;
+}
+
+.actions .vote {
+  display: inline-block;
+  background-color: #C13137;
+  padding: 10px 30px;
+  border-radius: 25px;
+  transition: background-color 0.1s ease-out;
+}
+
+.actions .vote:hover {
+  cursor: pointer;
+  background-color: #8F151A;
+  transition: background-color 0.1s ease-out;
+}
+
+.actions .vote p {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.actions .refrain {
+  display: inline-block;
+  margin-left: 40px;
+  padding: 9px 18px;
+  border-radius: 25px;
+  border-style: solid;
+  color: #C13137;
+  transition: background-color 0.1s ease-out;
+}
+
+.actions .refrain:hover {
+  cursor: pointer;
+  background-color: rgb(193, 49, 55, 0.2);
+  transition: background-color 0.1s ease-out;
+}
 
 /*
     Footer
