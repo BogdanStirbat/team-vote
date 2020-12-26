@@ -832,14 +832,51 @@ nav {
 }
 
 /*
-    Team screen (not admin)
+    Team screen 
 */
-.team-not-admin {
+.team-area {
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
   margin-left: 60px;
   max-width: 1000px;
+}
+
+.team-area.admin {
+  margin-top: 60px;
+}
+
+.online-members-area p {
+  text-align: center;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #322F8B;
+  font-size: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-admin-changes {
+  background-color: #C13137;
+  padding: 10px 10px;
+  border-radius: 25px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 256px;
+}
+
+.btn-admin-changes:hover {
+  cursor: pointer;
+  background-color: #8F151A;
+}
+
+.btn-admin-changes a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .online-members-area h1 {
@@ -897,6 +934,10 @@ nav {
   margin-top: 60px;
 }
 
+.question-area.admin {
+  margin-top: 20px;
+}
+
 .question {
   font-family: 'Mulish', sans-serif;
   font-weight: 700;
@@ -939,6 +980,28 @@ nav {
   color: #FFFFFF;
 }
 
+.actions .start-voting {
+  background-color: #C13137;
+  padding: 10px 30px;
+  border-radius: 25px;
+  margin: 0 auto;
+  max-width: 100px;
+  transition: background-color 0.1s ease-out;
+}
+
+.actions .start-voting:hover {
+  cursor: pointer;
+  background-color: #8F151A;
+  transition: background-color 0.1s ease-out;
+}
+
+.actions .start-voting p {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
 .actions .refrain {
   display: inline-block;
   margin-left: 40px;
@@ -953,6 +1016,72 @@ nav {
   cursor: pointer;
   background-color: rgb(193, 49, 55, 0.2);
   transition: background-color 0.1s ease-out;
+}
+
+.previous-questions h1 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #322F8B;
+  text-align: center;
+}
+
+.previous-questions-area {
+  width: 340px;
+  max-width: 340px;
+  height: 350px;
+  max-height: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+  margin-top: -20px;
+  background-color: rgba(50, 47, 139, 0.1);
+}
+
+.previous-question {
+  padding-top: 5px;
+}
+
+.previous-question .question {
+  text-align: center;
+}
+
+.previous-question p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  background-color: #FFFFFF;
+  color: #322F8B;
+  padding: 5px;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 6px;
+}
+
+
+.previous-question .delete-question {
+  margin-left: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 4px 20px;
+  border-radius: 25px;
+  background-color: #C13137;
+  color: #FFFFFF;
+  display: inline-block;
+}
+
+.previous-question .resume-question {
+  margin-left: 25px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 4px 20px;
+  border-radius: 25px;
+  background-color: #C13137;
+  color: #FFFFFF;
+  display: inline-block;
 }
 
 /*
