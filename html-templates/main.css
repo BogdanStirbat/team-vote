@@ -356,6 +356,49 @@ template {
 */
 
 /*
+    Common functionality accross elements
+*/
+
+.btn.primary {
+  background-color: #C13137;
+  padding: 10px 30px;
+  border-radius: 25px;
+  transition: background-color 0.1s ease-out;
+}
+
+.btn.primary a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.btn.primary:hover {
+  background-color: #8F151A;
+  transition: background-color 0.1s ease-out;
+  cursor: pointer;
+}
+
+.btn.secundary {
+  color: #C13137;
+  background-color: #ffffff;
+  transition: background-color 0.1s ease-out;
+  border-radius: 15px;
+  border-style: solid;
+  margin-left: 40px;
+}
+
+.btn.secundary a {
+  color: #C13137;
+  text-decoration: none;
+}
+
+.btn.secundary:hover {
+  background-color: rgb(193, 49, 55, 0.2);
+  transition: background-color 0.1s ease-out;
+  cursor: pointer;
+}
+
+
+/*
    Center all items.
 */
 .centered {
@@ -391,17 +434,10 @@ nav {
   font-size: 18px;
 }
 
-.navigation-item.sign-up {
-  background-color: #C13137;
-  transition: background-color 0.1s ease-out;
+.navigation-item.btn.primary.sign-up {
   padding: 10px 30px;
   border-radius: 15px;
   margin-top: -10px;
-}
-
-.navigation-item.sign-up:hover {
-  background-color: #8F151A;
-  transition: background-color 0.1s ease-out;
 }
 
 .navigation-item.sign-up a {
@@ -493,26 +529,25 @@ nav {
   margin-bottom: 10px;
 }
 
-.notification .delete-button {
+.notification .btn.primary.delete-button {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 12px;
   padding: 4px 20px;
   border-radius: 25px;
   margin-left: 14px;
-  background-color: #C13137;
   color: #FFFFFF;
   display: inline-block;
 }
 
-.notification .mark-read-button {
+.notification .btn.secundary.mark-read-button {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 12px;
   padding: 3px 8px;
   border-width: 2px;
   border-radius: 25px;
-  background-color: #ffffff;
+  margin-left: 0px;
   color: #000000;
   border-style: solid;
   border-color: #C13137;
@@ -575,49 +610,27 @@ nav {
   text-align: center;
 }
 
-.btn {
+.first-page .btn {
   display: inline-block;
   font-family: 'Mulish', sans-serif;
   font-weight: 700;
   font-size: 16px;
-}
-
-.btn a {
-  text-decoration: none;
-}
-
-.primary {
-  background-color: #C13137;
-  transition: background-color 0.1s ease-out;
-  padding: 10px 30px;
   border-radius: 15px;
 }
 
-.primary:hover {
-  background-color: #8F151A;
-  transition: background-color 0.1s ease-out;
+.first-page .btn.primary {
+  padding: 10px 30px;
 }
 
-.primary a {
+.first-page .btn.primary a {
+  text-decoration: none;
   color: #FFFFFF;
 }
 
-.secundary {
-  color: #C13137;
-  transition: background-color 0.1s ease-out;
+.first-page .btn.secundary {
   padding: 9px 29px;
   border-radius: 15px;
-  border-style: solid;
   margin-left: 40px;
-}
-
-.secundary:hover {
-  background-color: rgb(193, 49, 55, 0.2);
-  transition: background-color 0.1s ease-out;
-}
-
-.secundary a {
-  color: #C13137;
 }
 
 
@@ -680,22 +693,15 @@ nav {
   margin-top: 80px;
 }
 
-.btn-create-new-team {
+.create-join-team .btn.primary {
   text-align: center;
-  background-color: #C13137;
   display: inline-block;
   padding: 10px 20px;
   border-radius: 25px;
   margin-left: 49px;
 }
 
-.btn-create-new-team:hover {
-  background-color: #8F151A;
-}
-
-.btn-create-new-team a {
-  text-decoration: none;
-  color: #FFFFFF;
+.create-join-team .btn.primary a {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
   font-size: 24px;
@@ -808,27 +814,17 @@ nav {
   text-align: center;
 }
 
-
-.join-team .btn {
-  background-color: #C13137;
+.join-team .btn.primary {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
   padding: 20px 40px;
   border-radius: 25px;
   text-align: center;
   margin: 0 auto;
+  margin-bottom: 30%;
   max-width: 150px;
   display: block;
-  transition: background-color 0.1s ease-out;
-  margin-bottom: 30%;
-}
-
-.join-team .btn:hover {
-  background-color: #8F151A;
-  transition: background-color 0.1s ease-out;
-}
-
-.join-team .btn a {
-  color: #FFFFFF;
-  text-decoration: none;
 }
 
 /*
@@ -857,8 +853,7 @@ nav {
   margin-bottom: 20px;
 }
 
-.btn-admin-changes {
-  background-color: #C13137;
+.btn.primary.admin-changes {
   padding: 10px 10px;
   border-radius: 25px;
   text-align: center;
@@ -866,14 +861,7 @@ nav {
   max-width: 256px;
 }
 
-.btn-admin-changes:hover {
-  cursor: pointer;
-  background-color: #8F151A;
-}
-
-.btn-admin-changes a {
-  text-decoration: none;
-  color: #FFFFFF;
+.btn.primary.admin-changes a {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -959,18 +947,10 @@ nav {
   display: inline;
 }
 
-.actions .vote {
+.actions .btn.primary.vote {
   display: inline-block;
-  background-color: #C13137;
   padding: 10px 30px;
   border-radius: 25px;
-  transition: background-color 0.1s ease-out;
-}
-
-.actions .vote:hover {
-  cursor: pointer;
-  background-color: #8F151A;
-  transition: background-color 0.1s ease-out;
 }
 
 .actions .vote p {
@@ -980,19 +960,11 @@ nav {
   color: #FFFFFF;
 }
 
-.actions .start-voting {
-  background-color: #C13137;
+.actions .btn.primary.start-voting {
   padding: 10px 30px;
   border-radius: 25px;
   margin: 0 auto;
   max-width: 100px;
-  transition: background-color 0.1s ease-out;
-}
-
-.actions .start-voting:hover {
-  cursor: pointer;
-  background-color: #8F151A;
-  transition: background-color 0.1s ease-out;
 }
 
 .actions .start-voting p {
@@ -1002,20 +974,12 @@ nav {
   color: #FFFFFF;
 }
 
-.actions .refrain {
+.actions .btn.secundary.refrain {
   display: inline-block;
   margin-left: 40px;
   padding: 9px 18px;
   border-radius: 25px;
   border-style: solid;
-  color: #C13137;
-  transition: background-color 0.1s ease-out;
-}
-
-.actions .refrain:hover {
-  cursor: pointer;
-  background-color: rgb(193, 49, 55, 0.2);
-  transition: background-color 0.1s ease-out;
 }
 
 .previous-questions h1 {
@@ -1059,7 +1023,25 @@ nav {
   margin-bottom: 6px;
 }
 
+.previous-question .btn.primary.question {
+  color: #FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 4px 20px;
+  border-radius: 25px;
+  display: inline-block;
+}
 
+.previous-question .btn.primary.question.delete {
+  margin-left: 14px;
+}
+
+.previous-question .btn.primary.question.resume {
+  margin-left: 25px;
+}
+
+/*
 .previous-question .delete-question {
   margin-left: 14px;
   font-family: 'Roboto', sans-serif;
@@ -1083,6 +1065,7 @@ nav {
   color: #FFFFFF;
   display: inline-block;
 }
+*/
 
 /*
     Footer
