@@ -1,7 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, {useEffect} from 'react'
 
-function IndexGuest() {
+function IndexGuest(props) {
+  useEffect(() => {
+    document.title = "TeamVote"
+    window.scrollTo(0, 0)
+    props.setPageName("Home")
+  }, [])
+
   return (
     <>
       <div className="centered">

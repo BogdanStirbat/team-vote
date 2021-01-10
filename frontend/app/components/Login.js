@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ReactDOM from 'react-dom'
 
-function Login() {
+function Login(props) {
+  useEffect(() => {
+    document.title = "Login | TeamVote"
+    window.scrollTo(0, 0)
+    props.setPageName("Login")
+  }, [])
+
   return (
     <div className="centered">
       <div className="login">

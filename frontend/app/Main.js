@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
@@ -10,21 +10,23 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 
 function ExampleComponent() {
+  const [pageName, setPageName] = useState("Home")
+
   return (
     <BrowserRouter>
-      <Header />
+      <Header pageName={pageName} />
       <Switch>
         <Route path="/" exact>
-          <IndexGuest />
+          <IndexGuest setPageName={setPageName} />
         </Route>
         <Route path="/about">
-          <About />
+          <About setPageName={setPageName} />
         </Route>
         <Route path="/log-in">
-          <Login />
+          <Login setPageName={setPageName} />
         </Route>
         <Route path="/sign-up">
-          <SignUp />
+          <SignUp setPageName={setPageName} />
         </Route>
       </Switch>
       <Footer />
