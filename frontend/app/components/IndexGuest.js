@@ -1,14 +1,14 @@
-import React, {useEffect} from 'react'
+import React from 'react'
+
+import Page from './Page'
 
 function IndexGuest(props) {
-  useEffect(() => {
-    document.title = "TeamVote"
-    window.scrollTo(0, 0)
-    props.setPageName("Home")
-  }, [])
 
   return (
-    <>
+    <Page title="TeamVote"
+          name="Home"
+          setPageName={props.setPageName}>
+
       <div className="centered">
         <div className="first-page">
           <div className="description">
@@ -65,7 +65,8 @@ function IndexGuest(props) {
           </article>
         </div>
       </div>
-    </>
+
+    </Page>
   )
 }
 
