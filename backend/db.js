@@ -9,5 +9,5 @@ mongodb.connect(process.env.CONNECTIONSTRING, {useNewUrlParser: true, useUnified
   console.log("Connected to the database.")
   module.exports = client.db()
   const app = require('./app')
-  app.listen(3001)
+  app.listen(process.env.PORT)
 })

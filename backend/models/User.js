@@ -1,4 +1,5 @@
 const validator = require("validator")
+const bcrypt = require("bcryptjs")
 
 const usersCollection = require('../db').collection('users')
 
@@ -59,6 +60,8 @@ User.prototype.signUp = function() {
   console.log(this.errors)
 
   if (!this.errors.length) {
+    let salt = bcrypt.genSaltSync(10)
+    this.data.password = bcrypt.hashSync(this.data.password, salt)
     usersCollection.insertOne(this.data)
   }
 }
