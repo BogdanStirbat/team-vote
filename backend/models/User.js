@@ -28,7 +28,7 @@ User.prototype.cleanUp = function() {
   }
 }
 
-User.prototype.validate = function() {
+User.prototype.validate = async function() {
   if (this.data.username == "") {
     this.errors.push("Username is empty.")
   }
@@ -50,12 +50,17 @@ User.prototype.validate = function() {
   if (this.data.password.length > 50) {
     this.errors.push("The password can contain at most 50 characters.")
   }
+
+  let userWithSameEmail = await usersCollection.findOne({email: this.data.email})
+  if (userWithSameEmail) {
+    this.errors.push("This email address is already taken.")
+  }
 }
 
 User.prototype.signUp = function() {
   return new Promise(async (resolve, reject) => {
     this.cleanUp()
-    this.validate()
+    await this.validate()
 
     if (!this.errors.length) {
       let salt = bcrypt.genSaltSync(10)

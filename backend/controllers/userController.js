@@ -16,7 +16,7 @@ exports.signUp = function(req, res) {
       })
     })
     .catch(errors => {
-      res.status(500).send(errors)
+      res.status(400).send(errors)
     })
 }
 

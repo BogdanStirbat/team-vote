@@ -28,6 +28,11 @@ function SignUp(props) {
     } catch (e) {
       console.log("An error occurred at sign up.")
       console.log(e)
+      if (e.response) {
+        console.log(e.response.data)
+        console.log(e.response.status)
+        console.log(e.response.headers)
+      }
     }
   }
 
