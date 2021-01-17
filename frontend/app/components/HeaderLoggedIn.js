@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-function Header(props) {
+function HeaderLoggedIn(props) {
   return (
     <div className="centered">
       <nav>
@@ -17,11 +17,13 @@ function Header(props) {
           <div className={props.pageName=="About"? "navigation-item active": "navigation-item"}>
             <Link to="/about">About</Link>
           </div>
-          <div className={props.pageName=="Login"? "navigation-item active": "navigation-item"}>
-            <Link to="/log-in">Log In</Link>
+          <div className="avatar">
+            <a href="#">
+              <img src="/public/img/avatar-default.svg" alt="Avatar" />
+            </a>
           </div>
-          <div className="navigation-item btn primary sign-up">
-            <Link to="/sign-up">Sign Up</Link>
+          <div className="notifications-icon">
+            <img src="/public/img/notifications.svg" alt="Avatar" />
           </div>
         </div>
       </nav>
@@ -29,4 +31,4 @@ function Header(props) {
   )
 }
 
-export default Header
+export default HeaderLoggedIn

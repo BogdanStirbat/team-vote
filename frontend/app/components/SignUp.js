@@ -15,6 +15,7 @@ function SignUp(props) {
       const response = await Axios.post("http://localhost:3001/sign-up", {username: username, email: email, password: password})
       if (response.data) {
         console.log(response.data)
+        props.setLoggedIn(true)
       } else {
         console.log("Errors at login.")
       }
