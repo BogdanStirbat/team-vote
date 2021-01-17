@@ -6,6 +6,7 @@ import HeaderLoggedOut from './components/HeaderLoggedOut'
 import HeaderLoggedIn from './components/HeaderLoggedIn'
 import Footer from './components/Footer'
 import IndexGuest from './components/IndexGuest'
+import IndexLoggedIn from './components/IndexLoggedIn'
 import About from './components/About'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
@@ -19,7 +20,7 @@ function ExampleComponent() {
       {loggedIn? <HeaderLoggedIn pageName={pageName} setLoggedIn={setLoggedIn} />: <HeaderLoggedOut pageName={pageName} />}
       <Switch>
         <Route path="/" exact>
-          <IndexGuest setPageName={setPageName} />
+          {loggedIn? <IndexLoggedIn setPageName={setPageName} />: <IndexGuest setPageName={setPageName} />}
         </Route>
         <Route path="/about">
           <About setPageName={setPageName} />
