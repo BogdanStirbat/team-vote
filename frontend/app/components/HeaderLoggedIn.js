@@ -2,6 +2,12 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function HeaderLoggedIn(props) {
+  function logout(e) {
+    e.preventDefault()
+
+    props.setLoggedIn(false)
+  }
+  
   return (
     <div className="centered">
       <nav>
@@ -17,7 +23,7 @@ function HeaderLoggedIn(props) {
           <div className={props.pageName=="About"? "navigation-item active": "navigation-item"}>
             <Link to="/about">About</Link>
           </div>
-          <div className="avatar">
+          <div onClick={logout} className="avatar">
             <a href="#">
               <img src="/public/img/avatar-default.svg" alt="Avatar" />
             </a>

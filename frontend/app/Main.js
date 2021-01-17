@@ -16,7 +16,7 @@ function ExampleComponent() {
 
   return (
     <BrowserRouter>
-      {loggedIn? <HeaderLoggedIn pageName={pageName} />: <HeaderLoggedOut pageName={pageName} />}
+      {loggedIn? <HeaderLoggedIn pageName={pageName} setLoggedIn={setLoggedIn} />: <HeaderLoggedOut pageName={pageName} />}
       <Switch>
         <Route path="/" exact>
           <IndexGuest setPageName={setPageName} />
