@@ -53,17 +53,19 @@ User.prototype.validate = function() {
 }
 
 User.prototype.signUp = function() {
-  this.cleanUp()
-  this.validate()
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp()
+    this.validate()
 
-  console.log("User registered, errors: ")
-  console.log(this.errors)
-
-  if (!this.errors.length) {
-    let salt = bcrypt.genSaltSync(10)
-    this.data.password = bcrypt.hashSync(this.data.password, salt)
-    usersCollection.insertOne(this.data)
-  }
+    if (!this.errors.length) {
+      let salt = bcrypt.genSaltSync(10)
+      this.data.password = bcrypt.hashSync(this.data.password, salt)
+      await usersCollection.insertOne(this.data)
+      resolve()
+    } else {
+      reject(this.errors)
+    }
+  })
 }
 
 module.exports = User

@@ -12,7 +12,12 @@ function SignUp(props) {
   async function submitClicked(e) {
     e.preventDefault()
     try {
-      await Axios.post("http://localhost:3001/sign-up", {username: username, email:email, password: password})
+      const response = await Axios.post("http://localhost:3001/sign-up", {username: username, email: email, password: password})
+      if (response.data) {
+        console.log(response.data)
+      } else {
+        console.log("Errors at login.")
+      }
     } catch (e) {
       console.log("An error occurred at sign up.")
       console.log(e)
