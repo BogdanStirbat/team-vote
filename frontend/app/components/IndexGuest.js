@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 import Page from './Page'
 
@@ -15,8 +16,8 @@ function IndexGuest(props) {
             <h1>Collaborate within your team!</h1>
             <p>Share ideas, ask questions and vote.</p>
             <div className="buttons">
-              <div className="btn primary"><a href="#">Sign Up</a></div>
-              <div className="btn secundary"><a href="#">Log In</a></div>
+              <div className="btn primary"><Link to="/sign-up">Sign Up</Link></div>
+              <div className="btn secundary"><Link to="/log-in">Log In</Link></div>
             </div>
           </div>
           <div className="image">
