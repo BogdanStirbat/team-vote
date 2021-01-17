@@ -6,8 +6,11 @@ function HeaderLoggedIn(props) {
     e.preventDefault()
 
     props.setLoggedIn(false)
+    localStorage.removeItem("token")
+    localStorage.removeItem("email")
+    localStorage.removeItem("username")
   }
-  
+
   return (
     <div className="centered">
       <nav>

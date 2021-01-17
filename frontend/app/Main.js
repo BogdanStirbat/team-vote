@@ -12,7 +12,7 @@ import SignUp from './components/SignUp'
 
 function ExampleComponent() {
   const [pageName, setPageName] = useState("Home")
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(Boolean(localStorage.getItem("token")))
 
   return (
     <BrowserRouter>

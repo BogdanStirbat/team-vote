@@ -13,8 +13,10 @@ function Login(props) {
     try {
       const response = await Axios.post("http://localhost:3001/login", {email: email, password: password})
       if (response.data) {
-        console.log("Login successfully", response.data)
         props.setLoggedIn(true)
+        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("email", response.data.email)
+        localStorage.setItem("username", response.data.username)
       } else {
         console.log("Login failed.")
       }
