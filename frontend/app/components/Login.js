@@ -10,6 +10,7 @@ function Login(props) {
 
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const [errorLoginMesage, setErrorLoginMessage] = useState()
 
   async function loginClicked(e) {
     e.preventDefault()
@@ -23,9 +24,11 @@ function Login(props) {
         history.push("/")
       } else {
         console.log("Login failed.")
+        setErrorLoginMessage("Invalid username / password.")
       }
     } catch(e) {
       console.log("An error occurred at login", e)
+      setErrorLoginMessage("An error occurred. Please try again later.")
     }
   }
 
@@ -38,6 +41,11 @@ function Login(props) {
       <div className="centered">
         <div className="login">
           <form>
+            {(errorLoginMesage && errorLoginMesage.length > 0) &&
+              <div>
+                <div className="login-error">{errorLoginMesage}</div>
+              </div>
+            }
             <div className="form-element">
               <label htmlFor="email-login">Email</label>
               <input onChange={e => setEmail(e.target.value)} id="email-login" name="email" type="text" placeholder="Email" autoComplete="off" />
