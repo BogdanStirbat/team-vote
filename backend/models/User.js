@@ -68,4 +68,22 @@ User.prototype.signUp = function() {
   })
 }
 
+User.prototype.login = function() {
+  return new Promise(async (resolve, reject) => {
+    this.cleanUp()
+
+    usersCollection.findOne({email: this.data.email}).then((foundUser) => {
+      if (foundUser && bcrypt.compareSync(this.data.password, foundUser.password)) {
+        this.data = foundUser
+        resolve("Login succesfully.")
+      } else {
+        reject("Invalid username / password.")
+      }
+    }).catch(function(e) {
+      console.log("An error occurred searching for a user", e)
+      reject("An error occurred connecting to DB. Please try again later.")
+    })
+  })
+}
+
 module.exports = User
