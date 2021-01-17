@@ -1,7 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 function HeaderLoggedIn(props) {
+  const history = useHistory()
+
   function logout(e) {
     e.preventDefault()
 
@@ -9,6 +11,7 @@ function HeaderLoggedIn(props) {
     localStorage.removeItem("token")
     localStorage.removeItem("email")
     localStorage.removeItem("username")
+    history.push("/")
   }
 
   return (

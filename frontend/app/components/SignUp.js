@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import Axios from 'axios'
+import {useHistory} from 'react-router-dom'
 
 import Page from './Page'
 
 function SignUp(props) {
+
+  const history = useHistory()
 
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
@@ -14,8 +17,11 @@ function SignUp(props) {
     try {
       const response = await Axios.post("http://localhost:3001/sign-up", {username: username, email: email, password: password})
       if (response.data) {
-        console.log(response.data)
         props.setLoggedIn(true)
+        localStorage.setItem("token", response.data.token)
+        localStorage.setItem("email", response.data.email)
+        localStorage.setItem("username", response.data.username)
+        history.push("/")
       } else {
         console.log("Errors at login.")
       }

@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import Axios from 'axios'
+import { useHistory } from "react-router-dom";
 
 import Page from './Page'
 
 function Login(props) {
+
+  const history = useHistory();
 
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
@@ -17,6 +20,7 @@ function Login(props) {
         localStorage.setItem("token", response.data.token)
         localStorage.setItem("email", response.data.email)
         localStorage.setItem("username", response.data.username)
+        history.push("/")
       } else {
         console.log("Login failed.")
       }
