@@ -35,6 +35,8 @@ function MainComponent() {
       case "logout":
         draft.loggedIn = false
         return
+      case "changepage":
+        draft.pageName = action.data
     }
   }
 
@@ -52,26 +54,23 @@ function MainComponent() {
     }
   }, [state.loggedIn])
 
-
-  const [pageName, setPageName] = useState("Home")
-
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
         <BrowserRouter>
-          {state.loggedIn? <HeaderLoggedIn pageName={pageName} />: <HeaderLoggedOut pageName={pageName} />}
+          {state.loggedIn? <HeaderLoggedIn />: <HeaderLoggedOut />}
           <Switch>
             <Route path="/" exact>
-              {state.loggedIn? <IndexLoggedIn setPageName={setPageName} />: <IndexGuest setPageName={setPageName} />}
+              {state.loggedIn? <IndexLoggedIn />: <IndexGuest />}
             </Route>
             <Route path="/about">
-              <About setPageName={setPageName} />
+              <About />
             </Route>
             <Route path="/log-in">
-              <Login setPageName={setPageName} />
+              <Login />
             </Route>
             <Route path="/sign-up">
-              <SignUp setPageName={setPageName} />
+              <SignUp />
             </Route>
           </Switch>
           <Footer />

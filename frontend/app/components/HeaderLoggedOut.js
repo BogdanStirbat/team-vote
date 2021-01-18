@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 
+import StateContext from '../StateContext'
+
 function HeaderLoggedOut(props) {
+  const state = useContext(StateContext)
+
   return (
     <div className="centered">
       <nav>
@@ -11,13 +15,13 @@ function HeaderLoggedOut(props) {
           </Link>
         </div>
         <div className="navigation">
-          <div className={props.pageName=="Home"? "navigation-item active": "navigation-item"}>
+          <div className={state.pageName=="Home"? "navigation-item active": "navigation-item"}>
             <Link to="/">Home</Link>
           </div>
-          <div className={props.pageName=="About"? "navigation-item active": "navigation-item"}>
+          <div className={state.pageName=="About"? "navigation-item active": "navigation-item"}>
             <Link to="/about">About</Link>
           </div>
-          <div className={props.pageName=="Login"? "navigation-item active": "navigation-item"}>
+          <div className={state.pageName=="Login"? "navigation-item active": "navigation-item"}>
             <Link to="/log-in">Log In</Link>
           </div>
           <div className="navigation-item btn primary sign-up">

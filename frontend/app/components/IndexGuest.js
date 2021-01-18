@@ -7,8 +7,7 @@ function IndexGuest(props) {
 
   return (
     <Page title="TeamVote"
-          name="Home"
-          setPageName={props.setPageName}>
+          name="Home">
 
       <div className="centered">
         <div className="first-page">

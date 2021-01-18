@@ -1,9 +1,13 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
+
+import DispatchContext from '../DispatchContext'
 
 function Page(props) {
+  const dispatch = useContext(DispatchContext)
+
   useEffect(() => {
     document.title = props.title
-    props.setPageName(props.name)
+    dispatch({type: "changepage", data: props.name})
     window.scrollTo(0, 0)
   }, [])
 

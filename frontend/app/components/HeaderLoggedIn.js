@@ -2,9 +2,11 @@ import React, {useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 
 import DispatchContext from '../DispatchContext'
+import StateContext from '../StateContext'
 
 function HeaderLoggedIn(props) {
   const dispatch = useContext(DispatchContext)
+  const state = useContext(StateContext)
   const history = useHistory()
 
   function logout(e) {
@@ -23,10 +25,10 @@ function HeaderLoggedIn(props) {
           </Link>
         </div>
         <div className="navigation">
-          <div className={props.pageName=="Home"? "navigation-item active": "navigation-item"}>
+          <div className={state.pageName=="Home"? "navigation-item active": "navigation-item"}>
             <Link to="/">Home</Link>
           </div>
-          <div className={props.pageName=="About"? "navigation-item active": "navigation-item"}>
+          <div className={state.pageName=="About"? "navigation-item active": "navigation-item"}>
             <Link to="/about">About</Link>
           </div>
           <div onClick={logout} className="avatar">

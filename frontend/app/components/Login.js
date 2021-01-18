@@ -33,8 +33,7 @@ function Login(props) {
   return (
 
     <Page title="Login | TeamVote"
-          name="Login"
-          setPageName={props.setPageName}>
+          name="Login">
 
       <div className="centered">
         <div className="login">

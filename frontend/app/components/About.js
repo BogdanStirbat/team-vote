@@ -6,8 +6,7 @@ function About(props) {
 
   return (
     <Page title="About | TeamVote"
-          name="About"
-          setPageName={props.setPageName}>
+          name="About">
 
       <div className="centered">
         <div className="about">

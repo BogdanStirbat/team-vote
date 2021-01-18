@@ -5,8 +5,7 @@ import Page from './Page'
 function IndexLoggedIn(props) {
   return (
     <Page title="TeamVote"
-          name="Home"
-          setPageName={props.setPageName}>
+          name="Home">
 
       <div className="centered">
         <div className="home-logged-in">
