@@ -1,16 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 
+import DispatchContext from '../DispatchContext'
+
 function HeaderLoggedIn(props) {
+  const dispatch = useContext(DispatchContext)
   const history = useHistory()
 
   function logout(e) {
     e.preventDefault()
 
-    props.setLoggedIn(false)
-    localStorage.removeItem("token")
-    localStorage.removeItem("email")
-    localStorage.removeItem("username")
+    dispatch({type: "logout"})
     history.push("/")
   }
 

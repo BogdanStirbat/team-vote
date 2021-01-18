@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
-import Axios from 'axios'
+import React, {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import Axios from 'axios'
 
 import Page from './Page'
+import DispatchContext from '../DispatchContext'
 
 function SignUp(props) {
-
+  const dispatch = useContext(DispatchContext)
   const history = useHistory()
 
   const [username, setUsername] = useState()
@@ -19,10 +20,7 @@ function SignUp(props) {
     try {
       const response = await Axios.post("http://localhost:3001/sign-up", {username: username, email: email, password: password})
       if (response.data) {
-        props.setLoggedIn(true)
-        localStorage.setItem("token", response.data.token)
-        localStorage.setItem("email", response.data.email)
-        localStorage.setItem("username", response.data.username)
+        dispatch({type: "login", data: response.data})
         history.push("/")
       } else {
         console.log("Errors at login.")
