@@ -35,3 +35,21 @@ exports.login = function(req, res) {
       res.json(false)
     })
 }
+
+exports.checkJwtToken = function(req, res, next) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+  if (token == null) {
+    res.status(401).send("Invalid token.")
+    return
+  }
+  jwt.verify(token, process.env.JWTSECRET, (err, user) => {
+    if (err) {
+      console.log(err)
+      res.status(401).send("Invalid token.")
+      return
+    }
+    req.jwtUser = user
+    next()
+  })
+}
