@@ -5,6 +5,6 @@ Before the backend application starts, add a file named `.env` in the `backend` 
  - PORT=<the backend app port>
  - JWTSECRET=<the chosen jwt secret>
 
-To start the backend application: go into the backend folder and run `npm run start`. The backend application will start on port 3001.
+To start the backend application: go into the backend folder and run `npm run dev`. The backend application will start on port 3001.
 
 To start the frontend application: go into the frontend folder and run `npm run dev`. The frontend application will start on port 3000, and you can visit [it](http://localhost:3000) in your browser. 
