@@ -14,6 +14,7 @@ import IndexLoggedIn from './components/IndexLoggedIn'
 import About from './components/About'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import CreateNewTeam from './components/CreateNewTeam'
 
 function MainComponent() {
   const initialState = {
@@ -71,6 +72,9 @@ function MainComponent() {
             </Route>
             <Route path="/sign-up">
               <SignUp />
+            </Route>
+            <Route path="/create-new-team">
+              <CreateNewTeam />
             </Route>
           </Switch>
           <Footer />

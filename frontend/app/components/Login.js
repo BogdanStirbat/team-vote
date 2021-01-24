@@ -40,7 +40,7 @@ function Login(props) {
           <form>
             {(errorLoginMesage && errorLoginMesage.length > 0) &&
               <div>
-                <div className="login-error">{errorLoginMesage}</div>
+                <div className="error-message">{errorLoginMesage}</div>
               </div>
             }
             <div className="form-element">

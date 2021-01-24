@@ -46,7 +46,7 @@ function SignUp(props) {
           <form>
             {serverValidationErrors.length > 0 &&
               <div>
-                {serverValidationErrors.map(error => {return (<div className="login-error">{error}</div>)})}
+                {serverValidationErrors.map(error => {return (<div className="error-message">{error}</div>)})}
               </div>
             }
             <div className="form-element">

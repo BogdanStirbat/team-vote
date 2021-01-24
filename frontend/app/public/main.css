@@ -877,11 +877,18 @@ nav {
   border: 1px solid #C13137;
 }
 
-.login-error {
+.error-message {
   font-family: 'Mulish', sans-serif;
   font-weight: 400;
   font-size: 16px;
   color: #C13137;
+}
+
+.success-message {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #322F8B;
 }
 
 /*
@@ -908,6 +915,48 @@ nav {
   margin-bottom: 30%;
   max-width: 150px;
   display: block;
+}
+
+/*
+    Create new team screen
+*/
+
+.create-team h1 {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 64px;
+  color: #322F8B;
+  margin-top: 110px;
+  text-align: center;
+}
+
+.create-team .btn.primary {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 20px 40px;
+  border-radius: 25px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 30%;
+  max-width: 150px;
+  display: block;
+}
+
+.create-team-area {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.create-team-area input[type="text"] {
+  border: 1px solid #322F8B;
+  border-radius: 15px;
+  padding: 10px;
+  color: #8F151A;
+}
+
+.create-team-area input[type="text"]:focus {
+  border: 1px solid #C13137;
 }
 
 /*

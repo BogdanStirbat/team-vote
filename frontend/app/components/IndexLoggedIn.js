@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 import Page from './Page'
 
@@ -12,7 +13,9 @@ function IndexLoggedIn(props) {
 
           <div className="create-join-team">
             <div className="btn primary">
-              <a href="#">Create a new team</a>
+              <Link to="/create-new-team">
+                Create a new team
+              </Link>
             </div>
             <p>or</p>
             <p>Join an existing team</p>
