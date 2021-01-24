@@ -2,8 +2,9 @@ const validator = require("validator")
 
 const teamsCollection = require("../db").collection("teams")
 
-let Team = function(data) {
+let Team = function(data, jwtUser) {
   this.data = data
+  this.jwtUser = jwtUser
   this.errors = []
 }
 
@@ -13,8 +14,9 @@ Team.prototype.cleanup = function() {
   }
 
   this.data = {
-    name: this.data.name
-  } 
+    name: this.data.name,
+    admin: this.jwtUser._id
+  }
 }
 
 Team.prototype.validate = async function() {

@@ -1,7 +1,7 @@
 const Team = require("../models/Team")
 
 exports.create = function(req, res) {
-  let team = new Team(req.body)
+  let team = new Team(req.body, req.jwtUser)
   team
     .create()
     .then(result => {
