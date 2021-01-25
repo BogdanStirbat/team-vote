@@ -47,5 +47,9 @@ Team.prototype.create = function() {
   })
 }
 
+Team.getLoggedInUserTeams = async function(jwtUser) {
+  let adminTeams = await teamsCollection.find({admin: jwtUser._id}).toArray()
+  return adminTeams
+}
 
 module.exports = Team

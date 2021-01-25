@@ -11,3 +11,8 @@ exports.create = function(req, res) {
       res.status(400).send(errors)
     })
 }
+
+exports.getLoggedInUserTeams = async function(req, res) {
+  let teams = await Team.getLoggedInUserTeams(req.jwtUser)
+  res.status(200).send(teams)
+}
