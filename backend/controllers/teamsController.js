@@ -16,3 +16,16 @@ exports.getLoggedInUserTeams = async function(req, res) {
   let teams = await Team.getLoggedInUserTeams(req.jwtUser)
   res.status(200).send(teams)
 }
+
+exports.getTeamMembershipInfo = async function(req, res) {
+  const status = await Team.getTeamMembershipInfo(req.params.id, req.jwtUser)
+
+  if (!status) {
+    res.status(500).send()
+  }
+  if (status.error) {
+    res.status(404).send()
+  }
+
+  res.status(200).send(status)
+}

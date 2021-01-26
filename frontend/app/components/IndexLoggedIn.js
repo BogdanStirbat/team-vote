@@ -19,7 +19,6 @@ function IndexLoggedIn(props) {
                                           'Authorization': 'Bearer ' + state.user.token
                                          }
                                        })
-      console.log(response.data)
       setTeams(response.data)
     } catch(e) {
       console.log("Error retrieving teams.")
@@ -64,7 +63,7 @@ function IndexLoggedIn(props) {
                     teams.map(team => {
                       return (
                         <div className="team-name" key={team._id}>
-                          <a href="#">{team.name}</a>
+                          <Link to={"/team/" + team._id}>{team.name}</Link>
                         </div>
                       )
                     })}

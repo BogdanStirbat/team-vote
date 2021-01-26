@@ -1,4 +1,5 @@
 const validator = require("validator")
+const ObjectID = require('mongodb').ObjectID
 
 const teamsCollection = require("../db").collection("teams")
 
@@ -50,6 +51,36 @@ Team.prototype.create = function() {
 Team.getLoggedInUserTeams = async function(jwtUser) {
   let adminTeams = await teamsCollection.find({admin: jwtUser._id}).toArray()
   return adminTeams
+}
+
+Team.getTeamMembershipInfo = async function(teamId, jwtUser) {
+  let objectId
+  try {
+    objectId = new ObjectID(teamId)
+  } catch (e) {
+    return {
+      error: true
+    }
+  }
+
+  const team = await teamsCollection.findOne({_id: new ObjectID(teamId)})
+
+  if (!team) {
+    return {
+      error: true
+    }
+  }
+
+  let membershipStatus = "none"
+  if (team.admin == jwtUser._id) {
+    membershipStatus = "admin"
+  }
+
+  return {
+    team: team,
+    membershipStatus: membershipStatus
+  }
+
 }
 
 module.exports = Team

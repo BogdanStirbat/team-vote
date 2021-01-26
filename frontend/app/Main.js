@@ -15,6 +15,7 @@ import About from './components/About'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
 import CreateNewTeam from './components/CreateNewTeam'
+import TeamMain from './components/teams/TeamMain'
 
 function MainComponent() {
   const initialState = {
@@ -75,6 +76,9 @@ function MainComponent() {
             </Route>
             <Route path="/create-new-team">
               <CreateNewTeam />
+            </Route>
+            <Route path="/team/:id">
+              <TeamMain />
             </Route>
           </Switch>
           <Footer />
