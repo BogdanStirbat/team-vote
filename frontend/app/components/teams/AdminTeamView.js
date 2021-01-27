@@ -11,7 +11,7 @@ function AdminTeamView(props) {
       <div className="centered">
         <div className="team-area admin">
           <div className="online-members-area">
-            <p>Team name</p>
+            <p>{props.team.name}</p>
             <div className="btn primary admin-changes">
               <a href="#">Make changes to this team</a>
             </div>

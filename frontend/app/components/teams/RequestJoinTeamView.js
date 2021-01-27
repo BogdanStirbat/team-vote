@@ -8,7 +8,7 @@ function RequestJoinTeamView(props) {
     <Page>
       <div className="centered">
         <div className="join-team">
-          <h1>Team Name</h1>
+          <h1>{props.team.name}</h1>
       
           <div className="btn primary">
             <a href="#">Send join request</a>

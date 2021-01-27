@@ -19,7 +19,7 @@ function TeamMain(props) {
 
   async function retrieveMembershipInfo() {
     try {
-      const response = await Axios.get("http://localhost:3001/teams/600da936ba8d252b56d9887c/logged-in-user/membership-info", 
+      const response = await Axios.get("http://localhost:3001/teams/" + id + "/logged-in-user/membership-info", 
                                        {
                                          headers: {
                                           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function TeamMain(props) {
   }
 
   if (membershipInfo.membershipStatus == "admin") {
-    return <AdminTeamView />
+    return <AdminTeamView team={membershipInfo.team} />
   }
 
   if (membershipInfo.membershipStatus == "member") {
@@ -59,7 +59,7 @@ function TeamMain(props) {
     )
   }
 
-  return <RequestJoinTeamView />
+  return <RequestJoinTeamView team={membershipInfo.team} />
 }
 
 export default TeamMain
