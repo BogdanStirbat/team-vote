@@ -80,7 +80,11 @@ Team.getTeamMembershipInfo = async function(teamId, jwtUser) {
     team: team,
     membershipStatus: membershipStatus
   }
+}
 
+Team.searchTeams = async function(q) {
+  let teams = await teamsCollection.find({name: q}).toArray()
+  return teams
 }
 
 module.exports = Team

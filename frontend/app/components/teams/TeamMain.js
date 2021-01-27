@@ -26,8 +26,7 @@ function TeamMain(props) {
                                           'Authorization': 'Bearer ' + state.user.token
                                          }
                                        })
-      console.log("Retrieved data.")
-      console.log(response.data)
+                                       
       setMembershipInfo(response.data)
     } catch(e) {
       console.log("Error retrieving membership info.")

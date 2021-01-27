@@ -29,3 +29,8 @@ exports.getTeamMembershipInfo = async function(req, res) {
 
   res.status(200).send(status)
 }
+
+exports.searchTeams = async function(req, res) {
+  const teams = await Team.searchTeams(req.query.q)
+  res.status(200).send(teams)
+}

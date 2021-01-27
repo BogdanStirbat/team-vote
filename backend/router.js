@@ -14,5 +14,6 @@ apiRouter.post("/login", userController.login)
 apiRouter.post("/teams", userController.checkJwtToken, teamsController.create)
 apiRouter.get("/teams/my-teams", userController.checkJwtToken, teamsController.getLoggedInUserTeams)
 apiRouter.get("/teams/:id/logged-in-user/membership-info", userController.checkJwtToken, teamsController.getTeamMembershipInfo)
+apiRouter.get("/teams/search/", userController.checkJwtToken, teamsController.searchTeams)
 
 module.exports = apiRouter
