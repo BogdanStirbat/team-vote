@@ -800,6 +800,34 @@ nav {
               color 0.1s ease-out;
 }
 
+
+/*
+   Team search results
+*/
+.search-results {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  display: inline-block;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f6f6f6;
+}
+
+.search-results:hover {
+  background-color: #ddd;
+}
+
+.no-search-results {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #322F8B;
+  margin-top: 20px;
+}
+
 /*
     About screen
 */
