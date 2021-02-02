@@ -945,6 +945,14 @@ nav {
   display: block;
 }
 
+.join-request-sent {
+  text-align: center;
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  color: #8F151A;
+}
+
 /*
     Create new team screen
 */

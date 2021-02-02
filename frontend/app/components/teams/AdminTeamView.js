@@ -5,7 +5,7 @@ import Page from '../Page'
 function AdminTeamView(props) {
 
   return (
-    <Page title="Team"
+    <Page title={"Team " + props.team.name}
           page="Team">
 
       <div className="centered">
