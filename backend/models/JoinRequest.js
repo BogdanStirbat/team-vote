@@ -36,4 +36,9 @@ JoinRequest.prototype.create = async function() {
   return false
 }
 
+JoinRequest.findJoinRequest = async function(teamId, userId) {
+  const joinRequest = await joinRequestsCollection.findOne({requestor: userId, teamId: teamId})
+  return joinRequest
+}
+
 module.exports = JoinRequest

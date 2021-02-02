@@ -15,3 +15,12 @@ exports.sendJoinRequest = async function(req, res) {
 
   res.status(200).send()
 }
+
+exports.joinRequestSent = async function(req, res) {
+  const joinRequest = await JoinRequest.findJoinRequest(req.query.teamId, req.jwtUser._id)
+  if (joinRequest) {
+    res.status(200).send({exists: true})
+  } else {
+    res.status(200).send({exists: false})
+  }
+}

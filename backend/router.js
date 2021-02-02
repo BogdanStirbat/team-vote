@@ -18,5 +18,6 @@ apiRouter.get("/teams/:id/logged-in-user/membership-info", userController.checkJ
 apiRouter.get("/teams/search/", userController.checkJwtToken, teamsController.searchTeams)
 
 apiRouter.post("/join-requests", userController.checkJwtToken, joinRequestController.sendJoinRequest)
+apiRouter.get("/join-requests", userController.checkJwtToken, joinRequestController.joinRequestSent)
 
 module.exports = apiRouter
