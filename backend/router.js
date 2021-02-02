@@ -19,5 +19,7 @@ apiRouter.get("/teams/search/", userController.checkJwtToken, teamsController.se
 
 apiRouter.post("/join-requests", userController.checkJwtToken, joinRequestController.sendJoinRequest)
 apiRouter.get("/join-requests", userController.checkJwtToken, joinRequestController.joinRequestSent)
+apiRouter.put("/join-request/:id/approve", userController.checkJwtToken, joinRequestController.approveJoinRequest)
+apiRouter.put("/join-request/:id/decline", userController.checkJwtToken, joinRequestController.declineJoinRequest)
 
 module.exports = apiRouter

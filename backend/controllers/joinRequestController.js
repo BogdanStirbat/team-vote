@@ -24,3 +24,16 @@ exports.joinRequestSent = async function(req, res) {
     res.status(200).send({exists: false})
   }
 }
+
+exports.approveJoinRequest = async function(req, res) {
+
+}
+
+exports.declineJoinRequest = async function(req, res) {
+  const deleted = await JoinRequest.deleteJoinRequest(req.params.id, req.jwtUser._id)
+  if (deleted) {
+    res.status(200).send({deleted: true})
+  } else {
+    res.status(200).send({deleted: false})
+  }
+}
