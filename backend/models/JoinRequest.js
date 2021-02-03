@@ -2,6 +2,7 @@ const ObjectID = require('mongodb').ObjectID
 
 const teamsCollection = require("../db").collection("teams")
 const joinRequestsCollection = require("../db").collection("join-requests")
+const membershipCollection = require("../db").collection("team-membership")
 
 let JoinRequest = function(teamId, jwtUser) {
   this.data = {
@@ -41,9 +42,32 @@ JoinRequest.findJoinRequest = async function(teamId, userId) {
   return joinRequest
 }
 
+JoinRequest.approveJoinRequest = async function(joinRequestId, userId) {
+  const joinRequest = await joinRequestsCollection.findOne({_id: new ObjectID(joinRequestId)})
+  if (!joinRequest) {
+    return false
+  }
+
+  const team = await teamsCollection.findOne({_id: new ObjectID(joinRequest.teamId)})
+  if (!team) {
+    return false
+  }
+
+  if (team.admin != userId) {
+    return false
+  }
+
+  const result = await membershipCollection.insertOne({
+    teamId: joinRequest.teamId,
+    memberId: joinRequest.requestor
+  })
+
+  return result.insertedCount == 1? true: false
+}
+
 JoinRequest.deleteJoinRequest = async function(joinRequestId, userId) {
   const joinRequest = await joinRequestsCollection.findOne({_id: new ObjectID(joinRequestId)})
-  if (! joinRequest) {
+  if (!joinRequest) {
     return false
   }
 

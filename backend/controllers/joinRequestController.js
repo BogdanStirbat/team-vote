@@ -26,7 +26,12 @@ exports.joinRequestSent = async function(req, res) {
 }
 
 exports.approveJoinRequest = async function(req, res) {
-
+  const inserted = await JoinRequest.approveJoinRequest(req.params.id, req.jwtUser._id)
+  if (inserted) {
+    res.status(200).send({inserted: true})
+  } else {
+    res.status(200).send({inserted: false})
+  }
 }
 
 exports.declineJoinRequest = async function(req, res) {
