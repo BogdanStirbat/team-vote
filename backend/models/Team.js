@@ -2,6 +2,7 @@ const validator = require("validator")
 const ObjectID = require('mongodb').ObjectID
 
 const teamsCollection = require("../db").collection("teams")
+const membershipCollection = require("../db").collection("team-membership")
 
 let Team = function(data, jwtUser) {
   this.data = data
@@ -50,7 +51,15 @@ Team.prototype.create = function() {
 
 Team.getLoggedInUserTeams = async function(jwtUser) {
   let adminTeams = await teamsCollection.find({admin: jwtUser._id}).toArray()
-  return adminTeams
+
+  let memberships = await membershipCollection.find({memberId: jwtUser._id}).toArray()
+
+  let memberTeams = await Promise.all(memberships.map(async (member) => {
+    let team = await teamsCollection.findOne({_id: new ObjectID(member.teamId)})
+    return team
+  }))
+
+  return adminTeams.concat(memberTeams)
 }
 
 Team.getTeamMembershipInfo = async function(teamId, jwtUser) {
