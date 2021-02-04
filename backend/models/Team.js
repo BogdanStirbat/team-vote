@@ -85,6 +85,13 @@ Team.getTeamMembershipInfo = async function(teamId, jwtUser) {
     membershipStatus = "admin"
   }
 
+  if (membershipStatus == "none") {
+    const memberTeam = await membershipCollection.findOne({teamId: teamId, memberId: jwtUser._id})
+    if (memberTeam) {
+      membershipStatus = "member"
+    }
+  }
+
   return {
     team: team,
     membershipStatus: membershipStatus

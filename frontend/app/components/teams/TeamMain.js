@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Axios from 'axios'
 
 import AdminTeamView from './AdminTeamView'
+import MemberTeamView from './MemberTeamView'
 import RequestJoinTeamView from './RequestJoinTeamView'
 
 import StateContext from '../../StateContext'
@@ -51,11 +52,7 @@ function TeamMain(props) {
   }
 
   if (membershipInfo.membershipStatus == "member") {
-    return (
-      <div>
-        Member.
-      </div>
-    )
+    return <MemberTeamView team={membershipInfo.team} />
   }
 
   return <RequestJoinTeamView team={membershipInfo.team} />
