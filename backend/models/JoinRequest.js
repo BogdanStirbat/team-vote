@@ -42,6 +42,16 @@ JoinRequest.findJoinRequest = async function(teamId, userId) {
   return joinRequest
 }
 
+JoinRequest.retrieveTeam = async function(joinRequestId) {
+  const joinRequest = await joinRequestsCollection.findOne({_id: new ObjectID(joinRequestId)})
+  if (!joinRequest) {
+    return false
+  }
+
+  const team = await teamsCollection.findOne({_id: new ObjectID(joinRequest.teamId)})
+  return team
+}
+
 JoinRequest.approveJoinRequest = async function(joinRequestId, userId) {
   const joinRequest = await joinRequestsCollection.findOne({_id: new ObjectID(joinRequestId)})
   if (!joinRequest) {
@@ -62,7 +72,12 @@ JoinRequest.approveJoinRequest = async function(joinRequestId, userId) {
     memberId: joinRequest.requestor
   })
 
-  return result.insertedCount == 1? true: false
+  if (result.insertedCount == 0) {
+    return false
+  }
+
+  const deleteResult = await joinRequestsCollection.deleteOne({_id: new ObjectID(joinRequestId)})
+  return deleteResult.deletedCount == 1? true: false
 }
 
 JoinRequest.deleteJoinRequest = async function(joinRequestId, userId) {

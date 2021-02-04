@@ -10,7 +10,7 @@ exports.sendJoinRequest = async function(req, res) {
     return
   }
 
-  let notification = new Notification(req.body.teamId, req.jwtUser)
+  let notification = new Notification(req.body.teamId, req.jwtUser, "join_request")
   await notification.create()
 
   res.status(200).send()
@@ -26,8 +26,12 @@ exports.joinRequestSent = async function(req, res) {
 }
 
 exports.approveJoinRequest = async function(req, res) {
+  const team = await JoinRequest.retrieveTeam(req.params.id)
   const inserted = await JoinRequest.approveJoinRequest(req.params.id, req.jwtUser._id)
+
   if (inserted) {
+    let notification = new Notification(team._id, req.jwtUser, "join_request_approved")
+    await notification.create()
     res.status(200).send({inserted: true})
   } else {
     res.status(200).send({inserted: false})
