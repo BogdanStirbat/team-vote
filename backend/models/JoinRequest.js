@@ -134,4 +134,18 @@ JoinRequest.deleteJoinRequest = async function(joinRequestId, userId) {
   return result.deletedCount == 1? true: false
 }
 
+JoinRequest.joinRequestsForTem = async function(teamId, jwtUser) {
+  const team = await teamsCollection.findOne({_id: new ObjectID(teamId)})
+  if (!team) {
+    return false
+  }
+
+  if (team.admin != jwtUser._id) {
+    return false
+  }
+
+  const joinRequests = await joinRequestsCollection.find({teamId: teamId}).toArray()
+  return joinRequests
+}
+
 module.exports = JoinRequest

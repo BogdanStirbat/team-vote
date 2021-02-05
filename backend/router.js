@@ -21,5 +21,6 @@ apiRouter.post("/join-requests", userController.checkJwtToken, joinRequestContro
 apiRouter.get("/join-requests", userController.checkJwtToken, joinRequestController.joinRequestSent)
 apiRouter.put("/join-request/:id/approve", userController.checkJwtToken, joinRequestController.approveJoinRequest)
 apiRouter.put("/join-request/:id/decline", userController.checkJwtToken, joinRequestController.declineJoinRequest)
+apiRouter.get("/join-request/team/:id", userController.checkJwtToken, joinRequestController.joinRequestsForTeam)
 
 module.exports = apiRouter

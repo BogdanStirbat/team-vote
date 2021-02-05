@@ -22,7 +22,6 @@ exports.joinRequestSent = async function(req, res) {
 }
 
 exports.approveJoinRequest = async function(req, res) {
-  const team = await JoinRequest.retrieveTeam(req.params.id)
   const inserted = await JoinRequest.approveJoinRequest(req.params.id, req.jwtUser._id)
 
   if (inserted) {
@@ -38,5 +37,14 @@ exports.declineJoinRequest = async function(req, res) {
     res.status(200).send({deleted: true})
   } else {
     res.status(200).send({deleted: false})
+  }
+}
+
+exports.joinRequestsForTeam = async function(req, res) {
+  const joinRequests = await JoinRequest.joinRequestsForTem(req.params.id, req.jwtUser)
+  if (!joinRequests) {
+    res.status(400).send()
+  } else {
+    res.status(200).send(joinRequests)
   }
 }
