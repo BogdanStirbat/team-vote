@@ -1,5 +1,4 @@
 const JoinRequest = require("../models/JoinRequest")
-const Notification = require("../models/Notification")
 
 exports.sendJoinRequest = async function(req, res) {
   let joinRequest = new JoinRequest(req.body.teamId, req.jwtUser)
@@ -9,9 +8,6 @@ exports.sendJoinRequest = async function(req, res) {
     res.status(400).send(joinRequest.errors)
     return
   }
-
-  let notification = new Notification(req.body.teamId, req.jwtUser, "join_request")
-  await notification.create()
 
   res.status(200).send()
 }
@@ -30,8 +26,6 @@ exports.approveJoinRequest = async function(req, res) {
   const inserted = await JoinRequest.approveJoinRequest(req.params.id, req.jwtUser._id)
 
   if (inserted) {
-    let notification = new Notification(team._id, req.jwtUser, "join_request_approved")
-    await notification.create()
     res.status(200).send({inserted: true})
   } else {
     res.status(200).send({inserted: false})

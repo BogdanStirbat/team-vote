@@ -3,12 +3,14 @@ const ObjectID = require('mongodb').ObjectID
 const teamsCollection = require("../db").collection("teams")
 const joinRequestsCollection = require("../db").collection("join-requests")
 const membershipCollection = require("../db").collection("team-membership")
+const notificationsCollection = require("../db").collection("notifications")
 
 let JoinRequest = function(teamId, jwtUser) {
   this.data = {
     teamId: teamId,
     requestor: jwtUser._id
   }
+  this.jwtUser = jwtUser
   this.errors = []
 }
 
@@ -30,6 +32,17 @@ JoinRequest.prototype.create = async function() {
   await this.validate()
 
   if (!this.errors.length) {
+    const team = await teamsCollection.findOne({_id: new ObjectID(this.data.teamId)})
+    const notification = {
+      type: "join_request",
+      to: team.admin,
+      from: this.jwtUser._id,
+      teamId: this.data.teamId,
+      text: `User ${this.jwtUser.username} (${this.jwtUser.email}) wants to join team ${team.name}.`,
+      seen: false
+    }
+
+    await notificationsCollection.insertOne(notification)
     await joinRequestsCollection.insertOne(this.data)
     return true
   }
@@ -76,6 +89,17 @@ JoinRequest.approveJoinRequest = async function(joinRequestId, userId) {
     return false
   }
 
+  const notification = {
+    type: "join_request_approved",
+    to: joinRequest.requestor,
+    from: team.admin,
+    teamId: joinRequest.teamId,
+    text: `Your request to join the team ${team.name} has been approved.`,
+    seen: false
+  }
+
+  await notificationsCollection.insertOne(notification)
+
   const deleteResult = await joinRequestsCollection.deleteOne({_id: new ObjectID(joinRequestId)})
   return deleteResult.deletedCount == 1? true: false
 }
@@ -93,6 +117,18 @@ JoinRequest.deleteJoinRequest = async function(joinRequestId, userId) {
   if (team.admin != userId) {
     return false
   }
+
+  const notification = {
+    type: "join_request_declined",
+    to: joinRequest.requestor,
+    from: team.admin,
+    teamId: joinRequest.teamId,
+    text: `Your request to join the team ${team.name} has been declined.`,
+    seen: false
+  }
+
+  await notificationsCollection.insertOne(notification)
+
 
   const result = await joinRequestsCollection.deleteOne({_id: new ObjectID(joinRequestId)})
   return result.deletedCount == 1? true: false
