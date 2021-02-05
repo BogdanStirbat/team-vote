@@ -16,6 +16,7 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import CreateNewTeam from './components/CreateNewTeam'
 import TeamMain from './components/teams/TeamMain'
+import AdministerTeam from './components/teams/AdministerTeam'
 
 function MainComponent() {
   const initialState = {
@@ -79,6 +80,9 @@ function MainComponent() {
             </Route>
             <Route path="/team/:id">
               <TeamMain />
+            </Route>
+            <Route path="/teams/administer/:id">
+              <AdministerTeam />
             </Route>
           </Switch>
           <Footer />

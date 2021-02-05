@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 import Page from '../Page'
 
@@ -13,7 +14,7 @@ function AdminTeamView(props) {
           <div className="online-members-area">
             <p>{props.team.name}</p>
             <div className="btn primary admin-changes">
-              <a href="#">Make changes to this team</a>
+              <Link to={`/teams/administer/${props.team._id}`}>Make changes to this team</Link>
             </div>
             <h1>Online team members</h1>
             <div className="team-members">

@@ -4,6 +4,7 @@ const teamsCollection = require("../db").collection("teams")
 const joinRequestsCollection = require("../db").collection("join-requests")
 const membershipCollection = require("../db").collection("team-membership")
 const notificationsCollection = require("../db").collection("notifications")
+const usersCollection = require('../db').collection('users')
 
 let JoinRequest = function(teamId, jwtUser) {
   this.data = {
@@ -144,7 +145,18 @@ JoinRequest.joinRequestsForTem = async function(teamId, jwtUser) {
     return false
   }
 
-  const joinRequests = await joinRequestsCollection.find({teamId: teamId}).toArray()
+  const fountJoinRequests = await joinRequestsCollection.find({teamId: teamId}).toArray()
+
+  const joinRequests = Promise.all(fountJoinRequests.map(async (jr) => {
+    const user = await usersCollection.findOne({_id: new ObjectID(jr.requestor)})
+    return {
+      _id: jr._id,
+      teamId: jr.teamId,
+      requestor: jr.requestor,
+      text: `User ${user.username} (${user.email}) sent a join request.`
+    }
+  }))
+
   return joinRequests
 }
 
