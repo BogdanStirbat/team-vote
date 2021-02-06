@@ -4,6 +4,7 @@ const cors = require("cors")
 const userController = require("./controllers/userController")
 const teamsController = require("./controllers/teamsController")
 const joinRequestController = require("./controllers/joinRequestController")
+const notificationsController = require("./controllers/notificationsController")
 
 apiRouter.use(cors())
 
@@ -23,5 +24,7 @@ apiRouter.get("/join-requests", userController.checkJwtToken, joinRequestControl
 apiRouter.put("/join-request/:id/approve", userController.checkJwtToken, joinRequestController.approveJoinRequest)
 apiRouter.put("/join-request/:id/decline", userController.checkJwtToken, joinRequestController.declineJoinRequest)
 apiRouter.get("/join-request/team/:id", userController.checkJwtToken, joinRequestController.joinRequestsForTeam)
+
+apiRouter.get("/notifications", userController.checkJwtToken, notificationsController.getCurrentUserNotifications)
 
 module.exports = apiRouter

@@ -1,7 +1,6 @@
 const ObjectID = require('mongodb').ObjectID
 
 const notificationsCollection = require("../db").collection("notifications")
-const joinRequestsCollection = require("../db").collection("join-requests")
 const teamsCollection = require("../db").collection("teams")
 
 let Notification = function(teamId, jwtUser, type) {
@@ -35,8 +34,12 @@ Notification.prototype.create = async function() {
     }
   }
 
-
   await notificationsCollection.insertOne(this.data)
+}
+
+Notification.getCurrentUserNotifications = async function(jwtUser) {
+  const notifications = notificationsCollection.find({to: jwtUser._id}).toArray()
+  return notifications
 }
 
 module.exports = Notification
