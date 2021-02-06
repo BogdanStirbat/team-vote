@@ -30,6 +30,11 @@ exports.getTeamMembershipInfo = async function(req, res) {
   res.status(200).send(status)
 }
 
+exports.getTeamMembers = async function(req, res) {
+  const members = await Team.getTeamMembers(req.params.id, req.jwtUser)
+  res.status(200).send(members)
+}
+
 exports.searchTeams = async function(req, res) {
   const teams = await Team.searchTeams(req.query.q)
   res.status(200).send(teams)

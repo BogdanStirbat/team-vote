@@ -3,6 +3,7 @@ const ObjectID = require('mongodb').ObjectID
 
 const teamsCollection = require("../db").collection("teams")
 const membershipCollection = require("../db").collection("team-membership")
+const usersCollection = require('../db').collection('users')
 
 let Team = function(data, jwtUser) {
   this.data = data
@@ -96,6 +97,22 @@ Team.getTeamMembershipInfo = async function(teamId, jwtUser) {
     team: team,
     membershipStatus: membershipStatus
   }
+}
+
+Team.getTeamMembers = async function(teamId, jwtUser) {
+  const membership = await membershipCollection.find({teamId: teamId}).toArray()
+  
+  const members = await Promise.all(membership.map(async (membership) => {
+    const user = await usersCollection.findOne({_id: new ObjectID(membership.memberId)})
+    const member = {
+      _id: user._id,
+      username: user.username,
+      email: user.email
+    }
+    return member
+  }))
+
+  return members
 }
 
 Team.searchTeams = async function(q) {
