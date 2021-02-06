@@ -12,6 +12,7 @@ function AdministerTeam(props) {
     team: {},
     "membershipStatus": "not_computed"
   })
+  const [joinRequests, setJoinRequests] = useState([])
 
   const state = useContext(StateContext)
 
@@ -24,7 +25,7 @@ function AdministerTeam(props) {
                                           'Authorization': 'Bearer ' + state.user.token
                                          }
                                        })
-                                       
+      console.log(response.data)
       setMembershipInfo(response.data)
     } catch(e) {
       console.log("Error retrieving membership info.")
@@ -32,9 +33,68 @@ function AdministerTeam(props) {
     }
   }
 
+  async function retrieveJoinRequests() {
+    try {
+      const response = await Axios.get("http://localhost:3001/join-request/team/" + id, 
+                                      {
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          'Authorization': 'Bearer ' + state.user.token
+                                        }
+                                      })
+
+      setJoinRequests(response.data)
+    } catch(e) {
+      console.log("Error retrieving join requests.")
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     retrieveMembershipInfo()
+    retrieveJoinRequests()
   }, [])
+
+  async function acceptJoinRequest(e) {
+    e.preventDefault()
+    const requestId = e.target.getAttribute("data-request-id")
+
+    try {
+      const response = await Axios.put(`http://localhost:3001/join-request/${requestId}/approve`, 
+                                      {},
+                                      {
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          'Authorization': 'Bearer ' + state.user.token
+                                        }
+                                      })
+      retrieveJoinRequests()
+    } catch(e) {
+      console.log("Error approving join request.")
+      console.log(e)
+    }
+  }
+
+  async function declineJoinRequest(e) {
+    e.preventDefault()
+    const requestId = e.target.getAttribute("data-request-id")
+
+console.log(state.user.token)
+    try {
+      const response = await Axios.put(`http://localhost:3001/join-request/${requestId}/decline`, 
+                                      {},
+                                      {
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          'Authorization': 'Bearer ' + state.user.token
+                                        }
+                                      })
+      retrieveJoinRequests()
+    } catch(e) {
+      console.log("Error approving join request.")
+      console.log(e)
+    }
+  }
 
   return (
     <Page title={"Administer Team " + membershipInfo.team.name? membershipInfo.team.name: ''}
@@ -51,8 +111,22 @@ function AdministerTeam(props) {
     
           <div className="previous-questions">
             <h1>Join requests</h1>
-              <div className="previous-questions-area">
-              </div>
+            {
+              joinRequests && joinRequests.length > 0 && 
+                <div className="previous-questions-area">
+                  {
+                    joinRequests.map(joinRequest => {
+                      return (
+                        <div className="previous-question" key={joinRequest._id}>
+                          <p>{joinRequest.text}</p>
+                          <div className="btn primary question delete" data-request-id={joinRequest._id} onClick={acceptJoinRequest}>Accept</div>
+                          <div className="btn primary question resume" data-request-id={joinRequest._id} onClick={declineJoinRequest}>Decline</div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+            }
             </div>
         </div>
       </div>
