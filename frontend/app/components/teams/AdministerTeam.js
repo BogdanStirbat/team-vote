@@ -13,6 +13,7 @@ function AdministerTeam(props) {
     "membershipStatus": "not_computed"
   })
   const [joinRequests, setJoinRequests] = useState([])
+  const [teamMembers, setTeamMembers] = useState([])
 
   const state = useContext(StateContext)
 
@@ -25,7 +26,6 @@ function AdministerTeam(props) {
                                           'Authorization': 'Bearer ' + state.user.token
                                          }
                                        })
-      console.log(response.data)
       setMembershipInfo(response.data)
     } catch(e) {
       console.log("Error retrieving membership info.")
@@ -50,9 +50,26 @@ function AdministerTeam(props) {
     }
   }
 
+  async function retrieveTeamMembers() {
+    try {
+      const response = await Axios.get("http://localhost:3001/teams/members/" + id, 
+                                      {
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          'Authorization': 'Bearer ' + state.user.token
+                                        }
+                                      })
+      setTeamMembers(response.data)
+    } catch(e) {
+      console.log("Error retrieving team members.")
+      console.log(e)
+    }
+  }
+
   useEffect(() => {
     retrieveMembershipInfo()
     retrieveJoinRequests()
+    retrieveTeamMembers()
   }, [])
 
   async function acceptJoinRequest(e) {
@@ -97,7 +114,7 @@ console.log(state.user.token)
   }
 
   return (
-    <Page title={"Administer Team " + membershipInfo.team.name? membershipInfo.team.name: ''}
+    <Page title={"Administer Team " + membershipInfo.team && membershipInfo.team.name? membershipInfo.team.name: ''}
           page="Team">
 
       <div className="centered">
@@ -106,27 +123,43 @@ console.log(state.user.token)
             <p>{membershipInfo.team.name? membershipInfo.team.name: 'Team name'}</p>
             <h1>Team members</h1>
             <div className="team-members">
+              {
+                teamMembers && teamMembers.length > 0 &&
+                  <>
+                    {
+                      teamMembers.map(teamMember => {
+                        return (
+                          <div className="team-member">
+                            <p>{teamMember.username} ({teamMember.email})</p>
+                          </div>
+                        )
+                      })
+                    }
+                  </>
+              }
             </div>
           </div>
     
           <div className="previous-questions">
             <h1>Join requests</h1>
-            {
-              joinRequests && joinRequests.length > 0 && 
-                <div className="previous-questions-area">
-                  {
-                    joinRequests.map(joinRequest => {
-                      return (
-                        <div className="previous-question" key={joinRequest._id}>
-                          <p>{joinRequest.text}</p>
-                          <div className="btn primary question delete" data-request-id={joinRequest._id} onClick={acceptJoinRequest}>Accept</div>
-                          <div className="btn primary question resume" data-request-id={joinRequest._id} onClick={declineJoinRequest}>Decline</div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-            }
+            <div className="previous-questions-area">
+              {
+                joinRequests && joinRequests.length > 0 && 
+                  <>
+                    {
+                      joinRequests.map(joinRequest => {
+                        return (
+                          <div className="previous-question" key={joinRequest._id}>
+                            <p>{joinRequest.text}</p>
+                            <div className="btn primary question delete" data-request-id={joinRequest._id} onClick={acceptJoinRequest}>Accept</div>
+                            <div className="btn primary question resume" data-request-id={joinRequest._id} onClick={declineJoinRequest}>Decline</div>
+                          </div>
+                        )
+                      })
+                    }
+                  </>
+              }
+            </div>
             </div>
         </div>
       </div>
