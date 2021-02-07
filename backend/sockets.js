@@ -6,20 +6,25 @@ const io = require("socket.io") (server, {
   }
 })
 
+let users = []
+
 io.on("connection", function(socket) {
-  console.log("Connection.")
-  console.log(socket.id)
-
+  
   socket.on("userLoggedIn", data => {
-    console.log("Received data from client")
-    console.log(data)
+    const user = {
+      socket: socket,
+      username: data.username,
+      email: data.email,
+      token: data.token
+    }
 
-    socket.emit("userLoggedInAck", {message: "Login ACK"})
+    users.push(user)
+  })
+
+  socket.on("userLoggedOut", data => {
+    users = users.filter(user.email != data.email)
   })
 })
-
-let users = []
-let count = 0
 
 exports.registerUser = function(user) {
   count++

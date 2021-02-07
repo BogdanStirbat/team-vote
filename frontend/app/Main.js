@@ -31,33 +31,45 @@ function MainComponent() {
     pageName: "Home"
   }
 
+  const [state, dispatch] = useImmerReducer(reducer, initialState)
+
   function reducer(draft, action) {
     switch(action.type) {
       case "login":
         draft.loggedIn = true
         draft.user = action.data
+        sendUserLoggedInNotification()
         return
       case "logout":
         draft.loggedIn = false
+        sendUserLoggedOutNotification()
         return
       case "changepage":
         draft.pageName = action.data
     }
   }
 
-  const [state, dispatch] = useImmerReducer(reducer, initialState)
+  function sendUserLoggedInNotification() {
+    socket.current.emit("userLoggedIn", {
+      username: state.user.username,
+      email: state.user.email,
+      token: state.user.token
+    })
+  }
+
+  function sendUserLoggedOutNotification() {
+    socket.current.emit("userLoggedOut", {
+      username: state.user.username,
+      email: state.user.email,
+    })
+  }
 
   useEffect(() => {
     socket.current = io("http://localhost:3001/")
 
     if (state.user && state.user.token) {
-      socket.current.emit("userLoggedIn", {username: state.user.username, token: state.user.token})
+      sendUserLoggedInNotification()
     }
-
-    socket.current.on("userLoggedInAck", message => {
-      console.log("Received socket message from server")
-      console.log(message)
-    })
 
     return () => socket.current.disconnect()
   }, [])
