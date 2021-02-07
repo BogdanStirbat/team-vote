@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import { useImmerReducer } from "use-immer"
+import io from "socket.io-client"
 
 import DispatchContext from './DispatchContext'
 import StateContext from './StateContext'
@@ -19,6 +20,7 @@ import TeamMain from './components/teams/TeamMain'
 import AdministerTeam from './components/teams/AdministerTeam'
 
 function MainComponent() {
+  const socket = useRef(null)
   const initialState = {
     loggedIn: Boolean(localStorage.getItem("token")),
     user: {
@@ -44,6 +46,21 @@ function MainComponent() {
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState)
+
+  useEffect(() => {
+    socket.current = io("http://localhost:3001/")
+
+    if (state.user && state.user.token) {
+      socket.current.emit("userLoggedIn", {username: state.user.username, token: state.user.token})
+    }
+
+    socket.current.on("userLoggedInAck", message => {
+      console.log("Received socket message from server")
+      console.log(message)
+    })
+
+    return () => socket.current.disconnect()
+  }, [])
 
   useEffect(() => {
     if (state.loggedIn) {
