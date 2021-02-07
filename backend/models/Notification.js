@@ -42,4 +42,38 @@ Notification.getCurrentUserNotifications = async function(jwtUser) {
   return notifications
 }
 
+Notification.markNotificationRead = async function(notificationId, jwtUser) {
+  const notification = await notificationsCollection.findOne({_id: new ObjectID(notificationId)})
+  if (!notification) {
+    return false
+  }
+  if (notification.from != jwtUser._id && notification.to != jwtUser._id) {
+    return false
+  }
+
+  await notificationsCollection.updateOne(
+    {_id: new ObjectID(notificationId)},
+    {
+      $set: {
+        seen: true
+      }
+    }
+  )
+
+  return true
+}
+
+Notification.deleteNotification = async function(notificationId, jwtUser) {
+  const notification = await notificationsCollection.findOne({_id: new ObjectID(notificationId)})
+  if (!notification) {
+    return false
+  }
+  if (notification.from != jwtUser._id && notification.to != jwtUser._id) {
+    return false
+  }
+  
+  const deleteResult = await notificationsCollection.deleteOne({_id: new ObjectID(notificationId)})
+  return deleteResult.deletedCount == 1? true: false
+}
+
 module.exports = Notification

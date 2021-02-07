@@ -26,5 +26,7 @@ apiRouter.put("/join-request/:id/decline", userController.checkJwtToken, joinReq
 apiRouter.get("/join-request/team/:id", userController.checkJwtToken, joinRequestController.joinRequestsForTeam)
 
 apiRouter.get("/notifications", userController.checkJwtToken, notificationsController.getCurrentUserNotifications)
+apiRouter.put("/notifications/:id/mark-read", userController.checkJwtToken, notificationsController.markNotificationRead)
+apiRouter.delete("/notifications/:id/delete", userController.checkJwtToken, notificationsController.deleteNotification)
 
 module.exports = apiRouter
