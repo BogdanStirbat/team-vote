@@ -96,7 +96,6 @@ function AdministerTeam(props) {
     e.preventDefault()
     const requestId = e.target.getAttribute("data-request-id")
 
-console.log(state.user.token)
     try {
       const response = await Axios.put(`http://localhost:3001/join-request/${requestId}/decline`, 
                                       {},
