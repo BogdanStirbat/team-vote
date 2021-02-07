@@ -50,18 +50,45 @@ function HeaderLoggedIn(props) {
     setHideNotifications(!hideNotifications)
   }
 
-  function deleteNotification(e) {
+  async function deleteNotification(e) {
     e.preventDefault()
 
     const notificationId = e.target.getAttribute("data-notification-id")
-    console.log("Delete notification " + notificationId)
+
+    try {
+      const response = await Axios.delete(`http://localhost:3001/notifications/${notificationId}/delete`, 
+                                         {
+                                           headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': 'Bearer ' + state.user.token
+                                           }
+                                         })
+      loadNotifications()
+    } catch(e) {
+      console.log("Error deleting notification.")
+      console.log(e)
+    }
   }
 
-  function markAsReadNotification(e) {
+  async function markAsReadNotification(e) {
     e.preventDefault()
 
     const notificationId = e.target.getAttribute("data-notification-id")
-    console.log("Mark as read notification " + notificationId)
+
+    try {
+      const response = await Axios.put(`http://localhost:3001/notifications/${notificationId}/mark-read`, 
+                                      {},
+                                      {
+                                        headers: {
+                                          'Content-Type': 'application/json',
+                                          'Authorization': 'Bearer ' + state.user.token
+                                        }
+                                      })
+      loadNotifications()
+    } catch(e) {
+      console.log("Error marking notification read.")
+      console.log(e)
+    }
   }
 
   return (
@@ -100,7 +127,7 @@ function HeaderLoggedIn(props) {
                       {
                         notifications.map(notification => {
                           return (
-                            <div className="notification">
+                            <div className={notification.seen? "notification read": "notification"}>
                               <p>{notification.text}</p>
                               <div className="btn primary delete-button" data-notification-id={notification._id} onClick={deleteNotification}>Delete</div>
                               <div className="btn secundary mark-read-button" data-notification-id={notification._id}  onClick={markAsReadNotification}>Mark as read</div>
