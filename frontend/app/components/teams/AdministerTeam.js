@@ -129,7 +129,7 @@ function AdministerTeam(props) {
                     {
                       teamMembers.map(teamMember => {
                         return (
-                          <div className="team-member">
+                          <div className="team-member" key={teamMember._id}>
                             <p>{teamMember.username} ({teamMember.email})</p>
                           </div>
                         )
