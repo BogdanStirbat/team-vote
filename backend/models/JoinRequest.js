@@ -1,5 +1,7 @@
 const ObjectID = require('mongodb').ObjectID
 
+const sockets = require("../sockets")
+
 const teamsCollection = require("../db").collection("teams")
 const joinRequestsCollection = require("../db").collection("join-requests")
 const membershipCollection = require("../db").collection("team-membership")
@@ -45,6 +47,9 @@ JoinRequest.prototype.create = async function() {
 
     await notificationsCollection.insertOne(notification)
     await joinRequestsCollection.insertOne(this.data)
+
+    const toUser = await usersCollection.findOne({_id: new ObjectID(team.admin)})
+    sockets.sendNotification(toUser.email, notification)
     return true
   }
 
@@ -101,6 +106,9 @@ JoinRequest.approveJoinRequest = async function(joinRequestId, userId) {
 
   await notificationsCollection.insertOne(notification)
 
+  const toUser = await usersCollection.findOne({_id: new ObjectID(joinRequest.requestor)})
+  sockets.sendNotification(toUser.email, notification)
+
   const deleteResult = await joinRequestsCollection.deleteOne({_id: new ObjectID(joinRequestId)})
   return deleteResult.deletedCount == 1? true: false
 }
@@ -130,6 +138,8 @@ JoinRequest.deleteJoinRequest = async function(joinRequestId, userId) {
 
   await notificationsCollection.insertOne(notification)
 
+  const toUser = await usersCollection.findOne({_id: new ObjectID(joinRequest.requestor)})
+  sockets.sendNotification(toUser.email, notification)
 
   const result = await joinRequestsCollection.deleteOne({_id: new ObjectID(joinRequestId)})
   return result.deletedCount == 1? true: false

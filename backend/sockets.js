@@ -1,15 +1,14 @@
-const io = require("socket.io") (server, {
-  pingTimeout: 30000,
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"]
-  }
-})
+console.log("This happenned.")
 
 let users = []
 
-io.on("connection", function(socket) {
-  
+exports.onConnection = function(socket) {
+  console.log("Connection, sockerId: " + socket.id)
+
+  socket.on("disconnect", () => {
+    users = users.filter(user => user.socket.id != socket.id)
+  })
+
   socket.on("userLoggedIn", data => {
     const user = {
       socket: socket,
@@ -22,9 +21,18 @@ io.on("connection", function(socket) {
   })
 
   socket.on("userLoggedOut", data => {
-    users = users.filter(user.email != data.email)
+    users = users.filter(user => user.email != data.email)
   })
-})
+}
+
+exports.sendNotification = function(email, notification) {
+  const user = users.find(user => user.email == email)
+  if(!user) {
+    return
+  }
+
+  user.socket.emit("newNotification", notification)
+}
 
 exports.registerUser = function(user) {
   count++

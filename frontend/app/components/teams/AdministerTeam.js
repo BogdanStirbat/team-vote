@@ -86,6 +86,7 @@ function AdministerTeam(props) {
                                         }
                                       })
       retrieveJoinRequests()
+      retrieveTeamMembers()
     } catch(e) {
       console.log("Error approving join request.")
       console.log(e)

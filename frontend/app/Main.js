@@ -28,7 +28,9 @@ function MainComponent() {
       email: localStorage.getItem("email"),
       username: localStorage.getItem("username")
     },
-    pageName: "Home"
+    pageName: "Home",
+    notifications: [],
+    unreadNotificationsCount: 0
   }
 
   const [state, dispatch] = useImmerReducer(reducer, initialState)
@@ -38,14 +40,35 @@ function MainComponent() {
       case "login":
         draft.loggedIn = true
         draft.user = action.data
-        sendUserLoggedInNotification()
+        try {
+          sendUserLoggedInNotification()
+        } catch(ignored) {
+
+        }
         return
+
       case "logout":
         draft.loggedIn = false
-        sendUserLoggedOutNotification()
+        try {
+          sendUserLoggedOutNotification()
+        } catch(ignored) {
+
+        }
         return
+
       case "changepage":
         draft.pageName = action.data
+        return
+
+      case "newNotification":
+        draft.notifications.push(action.data)
+        draft.unreadNotificationsCount = draft.unreadNotificationsCount + 1
+        return
+
+      case "setNotifications":
+        draft.notifications = action.data
+        draft.unreadNotificationsCount = draft.notifications.filter(n => !n.seen).length
+        return
     }
   }
 
@@ -70,6 +93,10 @@ function MainComponent() {
     if (state.user && state.user.token) {
       sendUserLoggedInNotification()
     }
+
+    socket.current.on("newNotification", notification => {
+      dispatch({type: "newNotification", data: notification})
+    })
 
     return () => socket.current.disconnect()
   }, [])

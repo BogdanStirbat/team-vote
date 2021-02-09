@@ -9,9 +9,7 @@ function HeaderLoggedIn(props) {
   const dispatch = useContext(DispatchContext)
   const state = useContext(StateContext)
   const history = useHistory()
-  const [notifications, setNotifications] = useState([])
-  const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(0)
-  const [hideNotifications, setHideNotifications] = useState(false)
+  const [hideNotifications, setHideNotifications] = useState(true)
 
   async function loadNotifications() {
     try {
@@ -24,9 +22,7 @@ function HeaderLoggedIn(props) {
                                       })
       
       const retrievedNotifications = response.data
-      const unreadNotificationsCount = retrievedNotifications.filter(n=> !n.seen).length
-      setNotifications(retrievedNotifications)
-      setUnreadNotificationsCount(unreadNotificationsCount)
+      dispatch({type: "setNotifications", data: retrievedNotifications})
     } catch(e) {
       console.log("Error loading notifications.")
       console.log(e)
@@ -114,18 +110,18 @@ function HeaderLoggedIn(props) {
           <div className="notifications-icon" onClick={toogleNotifications}>
             <img src="/public/img/notifications.svg" alt="Avatar" />
             {
-              unreadNotificationsCount > 0 &&
+              state.unreadNotificationsCount > 0 &&
               <div className="notification-count">
-                <div className="count">{unreadNotificationsCount > 99? "99+": unreadNotificationsCount}</div>
+                <div className="count">{state.unreadNotificationsCount > 99? "99+": state.unreadNotificationsCount}</div>
               </div>
             }
             {
-              notifications && notifications.length > 0 &&
+              state.notifications && state.notifications.length > 0 &&
                 <div className={hideNotifications? "notifications-relative-positioning hidden": "notifications-relative-positioning"}>
                   <div className="notifications-area">
                     <>
                       {
-                        notifications.map(notification => {
+                        state.notifications.map(notification => {
                           return (
                             <div className={notification.seen? "notification read": "notification"}>
                               <p>{notification.text}</p>

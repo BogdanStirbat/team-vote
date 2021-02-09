@@ -6,9 +6,17 @@ app.use(express.json())
 app.use('/', require("./router"))
 
 const server = require("http").createServer(app)
-global.server = server
 
-// import sockets.js, so that it starts listening to incoming requests
 const sockets = require("./sockets")
+
+global.io = require("socket.io") (server, {
+  pingTimeout: 30000,
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"]
+  }
+})
+
+global.io.on("connection", sockets.onConnection)
 
 module.exports = server
